@@ -29,21 +29,20 @@
 			
 		function game () {
 			//creating fields					
-		   	for (var i = 0; i<9; i++) {
+		   	for (var i = 0; i < 9; i++) {
 				var newDiv = document.createElement("div");
 				pos.push(newDiv);
 				document.body.appendChild(newDiv);
 				pos[i].setAttribute("id", i + "_div" );
-				//c[i] = 0;
 				pos[i].addEventListener("click", turn);
 			}
 			//set field position
 			for(var i = 0; i < 9; i++){
 				pos[i].style.top = (i < 3) ? '200px' :
-								   (i < 6) ? '300px' : '400px';
+						   (i < 6) ? '300px' : '400px';
 				pos[i].style.left = (i < 3) ? i * 100 + 450 + 'px' :
-									(i < 6) ? (i - 3) * 100 + 450 + 'px' :
-											  (i - 6) * 100 + 450 + 'px';
+						    (i < 6) ? (i - 3) * 100 + 450 + 'px' :
+						    (i - 6) * 100 + 450 + 'px';
 
 			}
 			
@@ -63,7 +62,7 @@
 
 			function checkCondition(){
 				
-				for(var i = 0; i < 9; i+=3){
+				for(var i = 0; i < 9; i += 3){
 					if ( c[i] + c[i + 1] + c[i + 2]  == 3 ){
 						alert("X Win!");
 					} else if ( c[i] + c[i + 1] + c[i + 2]  == 30 ){
