@@ -1,0 +1,91 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Хрестики-нулики</title>
+	<style type="text/css">
+		div {
+			width: 99px;
+			height: 99px;
+			border: 0.5px solid #3399ff;
+			position: absolute;
+			box-sizing: border-box;
+			background-color: #3399ff;
+		}
+		span {
+			font-size: 85px;
+			padding: 0px 17px;
+			color: white;
+			font-family: sans-serif;
+			font-weight: bold;
+		}
+	</style>	
+</head>
+<body>
+	<script type="text/javascript">
+		document.body.onload = game;		
+		var pos = []; // pos == position
+		var c = [];	//с == condition
+		var xturn = true; // check that next turn will be 'x'
+			
+		function game () {
+			//creating fields					
+		   	for (var i = 0; i<9; i++) {
+				var newDiv = document.createElement("div");
+				pos.push(newDiv);
+				document.body.appendChild(newDiv);
+				pos[i].setAttribute("id", i + "_div" );
+				//c[i] = 0;
+				pos[i].addEventListener("click", turn);
+			}
+			//set field position
+			for(var i = 0; i < 9; i++){
+				pos[i].style.top = (i < 3) ? '200px' :
+								   (i < 6) ? '300px' : '400px';
+				pos[i].style.left = (i < 3) ? i * 100 + 450 + 'px' :
+									(i < 6) ? (i - 3) * 100 + 450 + 'px' :
+											  (i - 6) * 100 + 450 + 'px';
+
+			}
+			
+			function turn(div){
+				var stringId = div.target.getAttribute("id");
+				var intId = parseInt(stringId);
+				var span = document.createElement("span");
+				var x = document.createTextNode("X");
+				var o = document.createTextNode("O");
+				
+				span.appendChild( xturn ? x : o);
+				pos[intId].appendChild(span);
+				c[intId] = xturn ? 1 : 10; 
+				xturn = !xturn;
+				checkCondition();
+			}
+
+			function checkCondition(){
+				
+				for(var i = 0; i < 9; i+=3){
+					if ( c[i] + c[i + 1] + c[i + 2]  == 3 ){
+						alert("X Win!");
+					} else if ( c[i] + c[i + 1] + c[i + 2]  == 30 ){
+						alert("O Win!");
+					}
+				}
+				
+				for(var i = 0; i < 3; i++){
+					if ( c[i] + c[i + 3] + c[i + 6]  == 3 ){
+						alert("X Win!");
+					} else if ( c[i] + c[i + 3] + c[i + 6]  == 30 ){
+						alert("O Win!");
+					}
+				}
+				
+				if( c[0] + c[4] + c[8] == 3 || c[2] + c[4] + c[6] == 3){
+					alert("X win!");
+				} else if( c[0] + c[4] + c[8] == 30 || c[2] + c[4] + c[6] == 30 ){
+					alert("O Win!");
+				}
+			}	
+		}	  		
+	</script>
+	</body>
+</html>
